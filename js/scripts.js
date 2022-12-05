@@ -1,8 +1,4 @@
 //need to add a way to end game at 100 pts
-//need to display whose turn it currently is
-
-//need to add/hide 
-
 
 function Game() {
   this.players = [];
@@ -60,8 +56,6 @@ newGame.players.push(player1, player2);
 
 //UI
 
-
-//need to make current roll an object property
 function displayScores() {
   document.querySelector("span#player1TotalScore").innerText = player1.totalScore;
   document.querySelector("span#player2TotalScore").innerText = player2.totalScore;
@@ -87,6 +81,24 @@ function manageUI () {
       document.getElementById(`passDicePlayer${(newGame.activePlayer)+1}`).setAttribute("class", "hidden");
   }
 }
+function amIWinner() {
+  let p1Controls = document.getElementById("player1Controls")
+  let p2Controls = document.getElementById("player2Controls")
+
+  if ((player1.totalScore + player1.turnScore) >= 100) {
+    player1.totalScore += player1.turnScore;
+    p1Controls.setAttribute("class", "hidden");
+    p2Controls.setAttribute("class", "hidden");
+    document.getElementById("winner").removeAttribute("class");
+    document.getElementById("winnerIndex").innerText = "1";
+  } else if ((player2.totalScore + player2.turnScore) >= 100) {
+    player2.totalScore += player2.turnScore;
+    p1Controls.setAttribute("class", "hidden");
+    p2Controls.setAttribute("class", "hidden");
+    document.getElementById("winner").removeAttribute("class");
+    document.getElementById("winnerIndex").innerText = "2";
+  }
+}
  
 window.addEventListener("load", function() {
   let player1RollBtn = document.getElementById("rollDicePlayer1");
@@ -97,6 +109,7 @@ window.addEventListener("load", function() {
   player1RollBtn.addEventListener('click', function () {
     newGame.players[newGame.activePlayer].rollDice();
     document.getElementById("passDicePlayer1").removeAttribute("class", "hidden");
+    amIWinner();
     displayScores();
     manageUI();
   });
@@ -104,6 +117,7 @@ window.addEventListener("load", function() {
   player1PassBtn.addEventListener('click', function () {
     newGame.players[newGame.activePlayer].endTurn();
     document.getElementById("passDicePlayer1").setAttribute("class", "hidden");
+    amIWinner();
     displayScores();
     manageUI();
   });
@@ -112,6 +126,7 @@ window.addEventListener("load", function() {
   player2RollBtn.addEventListener('click', function () {
     newGame.players[newGame.activePlayer].rollDice();
     document.getElementById("passDicePlayer2").removeAttribute("class", "hidden");
+    amIWinner();
     displayScores();
     manageUI();
   });
@@ -119,6 +134,7 @@ window.addEventListener("load", function() {
   player2PassBtn.addEventListener('click', function () {
     newGame.players[newGame.activePlayer].endTurn();
     document.getElementById("passDicePlayer2").setAttribute("class", "hidden");
+    amIWinner();
     displayScores();
     manageUI();
   });
