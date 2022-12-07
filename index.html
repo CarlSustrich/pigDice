@@ -12,11 +12,24 @@
 
   <h1>Pig Dice</h1>
   <br>
-  <form id="numberOfPlayers">
-    <input type="radio" id="1player" name="userCount" value="1">
-    <label for="1player">1 Player</label><br>
+  <form id="settings">
+    <input type="radio" id="1player" name="userCount" value="1" checked>
+    <label for="1player">1 Player</label>
+    <br>
     <input type="radio" id="2player" name="userCount" value="2">
-    <label for="2player">2 Player</label><br>
+    <label for="2player">2 Player</label>
+    <br><br>
+    Variant game settings:
+    <br><br>
+    Dice Count:
+    <input type="radio" id="1dice" name="diceCount" value="1" checked>
+    <label for="1dice">1 Dice Mode</label>
+    <input type="radio" id="2dice" name="diceCount" value="2">
+    <label for="2dice">2 Dice Mode</label>
+    <br><br>
+    <label for="maxScore">Winning Score: </label>
+    <input type="number" id="maxScore" name="maxScore" value="100" min="50" max="200">
+    <br>
     <input type="submit">
   </form>
   <br>
@@ -32,6 +45,7 @@
     <div>
       <h3>Player 1's turn</h3>
       <h4>You just rolled a: <span id="player1CurrentRoll">0</span></h4>
+      <h4 id= "player1roll2" class="hidden">You just rolled a: <span id="player1CurrentRoll2">0</span></h4>
       <h4>Your current turn score is: <span id="player1TurnScore">0</span></h4>
       <div id="player1Controls">
         <button type="button" id="rollDicePlayer1"> Roll </button>
@@ -42,6 +56,7 @@
     <div>
       <h3>Player 2's turn</h3>
       <h4>You just rolled a: <span id="player2CurrentRoll">0</span></h4>
+      <h4 id = "player2roll2" class="hidden">You just rolled a: <span id="player2CurrentRoll2" >0</span></h4>
       <h4>Your current turn score is: <span id="player2TurnScore">0</span></h4>
       <div id="player2Controls" class="hidden">
         <button type="button" id="rollDicePlayer2"> Roll </button>
